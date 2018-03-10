@@ -7,11 +7,12 @@ void setup() {
     fill(0);
 }
 
-void draw() {
+void draw(){
     background(250, 241, 145);
     textAlign(CENTER);
     textSize(50);
-    text("StudyBuddy", width/2, height/2);
+    text("StudyBuddy", width/2, height/4);
+    rect(width/2 - 200, height/2 - 50, 400, 100);
 }
 
 void mousePressed(){
