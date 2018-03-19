@@ -14,6 +14,11 @@ Screen currentScreen;
 void setup() {
     fullScreen();
     //imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+    
+    PFont font = createFont("arvo/Arvo-Regular.ttf", 48); 
+    textFont(font, 32); 
+    text("word", 15, 50);
+    
     Screen loginScreen = new Screen("Login", c2);
     currentScreen = loginScreen;
     TextField username = new TextField(width/2, height/2, 500, 80);
