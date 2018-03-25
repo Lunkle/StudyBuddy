@@ -27,7 +27,7 @@ void setup() {
     loginScreen.addComponent(enterDisplayName);
     Label title = new Label("StudyBuddy", 80, width/2, 3 * height/8, c5);
     loginScreen.addComponent(title);
-    loginScreen.addGradient(c3);
+    loginScreen.addGradient(c4);
 }
 
 void draw(){

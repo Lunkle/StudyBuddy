@@ -16,7 +16,12 @@ class Screen{
     }
     
     void addComponent(UIComponent component){
+        component.number = components.length;
         components = (UIComponent[]) append(components, component);
+    }
+    
+    void removeComponent(int componentNumber){
+        components = 
     }
     
     void displayScreen(){

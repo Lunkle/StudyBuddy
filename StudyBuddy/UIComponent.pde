@@ -1,6 +1,6 @@
 abstract class UIComponent{
     int number;
-    PVector position;    
+    PVector position;
     
     void displayComponent(){}
 }
