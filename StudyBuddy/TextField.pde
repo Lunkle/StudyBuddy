@@ -1,11 +1,8 @@
-TextField[] textBoxes = {};
 TextField currentFocus;
 float k = 2*PI/(530 * frameRate/100);
 int padding = 3;
 
-class TextField{
-    int number;
-    PVector position;
+class TextField extends UIComponent{
     int boxWidth;
     int boxHeight;
     
@@ -17,15 +14,10 @@ class TextField{
         position = new PVector(middleX - boxWidth/2, middleY - boxHeight/2);
         this.boxWidth = boxWidth;
         this.boxHeight = boxHeight;
-        number = textBoxes.length;
-        textBoxes = (TextField[]) append(textBoxes, this);
     }
     
-    void addToScreen(Screen screen){
-        screen.textBoxes = (TextField[]) append(textBoxes, this);
-    }
-    
-    public void displayTextField(){
+    public void displayComponent(){
+        textFont(arvo, 32);
         noStroke();
         //Draw text field.
         fill(0);
@@ -36,7 +28,7 @@ class TextField{
         fill(0);
         textAlign(LEFT);
         textSize(boxHeight - 20);
-        text(" " + text, position.x, position.y + boxHeight - padding - 15);
+        text(" " + text, position.x, position.y + 7*boxHeight/10);
         //Draw text cursor if focused.
         stroke(0);
         if(currentFocus != null){
@@ -98,9 +90,5 @@ class TextField{
         }else{
             textCursorPosition = lowerBound;
         }
-    }
-    
-    void clearAllTextFields(){
-        textBoxes = new TextField[0];
     }
 }

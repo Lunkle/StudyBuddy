@@ -9,20 +9,25 @@ color c3 = color(194, 234, 155);
 color c4 = color(127, 193, 145);
 color c5 = color(23, 169, 146);
 
+PFont arvo;
+PFont ubuntu;
+
 Screen currentScreen;
 
 void setup() {
     fullScreen();
     //imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
     
-    PFont font = createFont("arvo/Arvo-Regular.ttf", 48); 
-    textFont(font, 32); 
-    text("word", 15, 50);
+    arvo = createFont("arvo/Arvo-Regular.ttf", 72);
+    ubuntu = createFont("ubuntu/Ubuntu-R.ttf", 72);
     
     Screen loginScreen = new Screen("Login", c2);
     currentScreen = loginScreen;
-    TextField username = new TextField(width/2, height/2, 500, 80);
-    username.addToScreen(loginScreen);
+    TextField enterDisplayName = new TextField(width/2, height/2, 400, 50);
+    loginScreen.addComponent(enterDisplayName);
+    Label title = new Label("StudyBuddy", 80, width/2, 3 * height/8, c5);
+    loginScreen.addComponent(title);
+    loginScreen.addGradient(c3);
 }
 
 void draw(){
@@ -47,14 +52,17 @@ void keyPressed() {
 boolean keyboardOpen = false;
 void mousePressed(){
     boolean pressedTextField = false;
-    for(int i = textBoxes.length - 1; i > -1; i--){
-        if(mouseX > textBoxes[i].position.x && mouseX < textBoxes[i].position.x + textBoxes[i].boxWidth && mouseY > textBoxes[i].position.y && mouseY < textBoxes[i].position.y + textBoxes[i].boxHeight){
-            //toggleKeyboard(true);
-            currentFocus = textBoxes[i];
-            currentFocus.setFocus(mouseX);
-            print("done set focus");
-            pressedTextField = true;
-            break;
+    for(int i = currentScreen.components.length - 1; i > -1; i--){
+        if(currentScreen.components[i] instanceof TextField){
+            TextField textField = (TextField) currentScreen.components[i];
+            if(mouseX > textField.position.x && mouseX < textField.position.x + textField.boxWidth && mouseY > textField.position.y && mouseY < textField.position.y + textField.boxHeight){
+                //toggleKeyboard(true);
+                currentFocus = textField;
+                currentFocus.setFocus(mouseX);
+                print("done set focus");
+                pressedTextField = true;
+                break;
+            }
         }
     }
     if(pressedTextField == false){
