@@ -5,7 +5,7 @@ class Label extends UIComponent{
     int textPositioning = CENTER;
     float lifeTime = 0;
     float lifeTimeMax = -1;
-    boolean timer = false;
+    protected boolean timer = false;
     
     Label(String text, int textSize, float xValue, float yValue, color textColour){
         this.text = text;
@@ -19,18 +19,26 @@ class Label extends UIComponent{
     }
     
     void setTimer(int time){
-        
+        timer = true;
+        lifeTimeMax = time;
     }
     
     void displayComponent(){
+        lifeTime += 1000/frameRate;
+        if(timer){
+            if(lifeTimeMax - lifeTime <= 1000){
+                fill(colour, (lifeTimeMax - lifeTime)/(500.0/255.0));
+                println(1 - (lifeTimeMax - lifeTime)/500);
+            }
+        }else{
+            fill(colour);
+        }
         textAlign(textPositioning);
         textFont(arvo, size);
-        fill(colour);
         text(text, position.x, position.y);
-        lifeTime++;
         if(timer){
             if(lifeTime > lifeTimeMax){
-                
+                screen.removeComponent(number);
             }
         }
     }

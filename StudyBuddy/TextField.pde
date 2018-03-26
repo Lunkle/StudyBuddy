@@ -53,6 +53,7 @@ class TextField extends UIComponent {
         if(textWidth(text) + textWidth(character) > boxWidth - padding - textWidth(" ")){
             Label tooLongWarning = new Label("Name too long", boxHeight - 20, position.x, position.y + boxHeight + boxHeight - 20, c5);
             tooLongWarning.setPositioning(LEFT);
+            tooLongWarning.setTimer(1000);
             currentScreen.addComponent(tooLongWarning);
         }else{
             String text1 = text.substring(0, textCursorPosition);

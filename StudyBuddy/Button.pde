@@ -1,2 +1,7 @@
 class Button{
+    
+    
+    void displayComponent(){
+    
+    }
 }
