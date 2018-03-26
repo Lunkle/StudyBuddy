@@ -51,7 +51,7 @@ class TextField extends UIComponent {
     void addCharacter(char character) {
         textSize(boxHeight - 20);
         if(textWidth(text) + textWidth(character) > boxWidth - padding - textWidth(" ")){
-            Label tooLongWarning = new Label("Name too long", boxHeight - 20, position.x, position.y + boxHeight + boxHeight - 20, c5);
+            Label tooLongWarning = new Label("Name too long", boxHeight - 20, position.x, position.y + boxHeight + boxHeight - 15, c1);
             tooLongWarning.setPositioning(LEFT);
             tooLongWarning.setTimer(1000);
             currentScreen.addComponent(tooLongWarning);
@@ -59,7 +59,6 @@ class TextField extends UIComponent {
             String text1 = text.substring(0, textCursorPosition);
             String text2 = text.substring(textCursorPosition, text.length());
             text = text1 + character + text2;
-            println(text1, character, text2);
             textCursorPosition++;
         }
     }
