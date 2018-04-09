@@ -1,7 +1,12 @@
-abstract class UIComponent{
+abstract class UIComponent {
     int number;
     Screen screen;
     PVector position;
-    
-    void displayComponent(){}
+
+    UIComponent(float xPos, float yPos) {
+        position = new PVector(xPos, yPos);
+    }
+
+    void displayComponent() {
+    }
 }

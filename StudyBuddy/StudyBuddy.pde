@@ -16,21 +16,26 @@ Screen currentScreen;
 
 void setup() {
     fullScreen();
+    frameRate(20);
     //imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-    
+
     arvo = createFont("arvo/Arvo-Regular.ttf", 72);
     ubuntu = createFont("ubuntu/Ubuntu-R.ttf", 72);
-    
+
     Screen loginScreen = new Screen("Login", c2);
     currentScreen = loginScreen;
     TextField enterDisplayName = new TextField(width/2, height/2, 400, 50);
     loginScreen.addComponent(enterDisplayName);
     Label title = new Label("StudyBuddy", 80, width/2, 3 * height/8, c5);
     loginScreen.addComponent(title);
+    Button go = new Button("Go", 20, c2, width/2, height/2 + 100, 100, 50, c5);
+    //@Override
+    
+    loginScreen.addComponent(go);
     loginScreen.addGradient(c4);
 }
 
-void draw(){
+void draw() {
     background(c2);
     textAlign(CENTER);
     textSize(80);
@@ -40,43 +45,44 @@ void draw(){
 }
 
 void keyPressed() {
-    if(currentFocus != null){
+    if (currentFocus != null) {
         if (keyCode == BACKSPACE) {
             currentFocus.deleteCharacter();
-        } else if((key > 31) && (key != CODED)){
+        } else if ((key > 31) && (key != CODED)) {
             currentFocus.addCharacter(key);
         }
     }
 }
 
 boolean keyboardOpen = false;
-void mousePressed(){
+void mousePressed() {
     boolean pressedTextField = false;
-    for(int i = currentScreen.components.length - 1; i > -1; i--){
-        if(currentScreen.components[i] instanceof TextField){
+    for (int i = currentScreen.components.length - 1; i > -1; i--) {
+        if (currentScreen.components[i] instanceof TextField) {
             TextField textField = (TextField) currentScreen.components[i];
-            if(mouseX > textField.position.x && mouseX < textField.position.x + textField.boxWidth && mouseY > textField.position.y && mouseY < textField.position.y + textField.boxHeight){
-                //toggleKeyboard(true);
+            if (mouseX > textField.position.x && mouseX < textField.position.x + textField.boxWidth && mouseY > textField.position.y && mouseY < textField.position.y + textField.boxHeight) {
+                toggleKeyboard(true);
                 currentFocus = textField;
                 currentFocus.setFocus(mouseX);
                 print("done set focus");
                 pressedTextField = true;
                 break;
             }
+        } else if (currentScreen.components[i] instanceof Button) {
         }
     }
-    if(pressedTextField == false){
-        //toggleKeyboard(false);
+    if (pressedTextField == false) {
+        toggleKeyboard(false);
         currentFocus = null;
     }
 }
 
-//void toggleKeyboard(boolean toggleOn){
-//    if(toggleOn == true && keyboardOpen == false) {
-//        openKeyboard();
-//        keyboardOpen = true;
-//    }else if(toggleOn == false && keyboardOpen == true){
-//        closeKeyboard();
-//        keyboardOpen = false;
-//    }
-//}
+void toggleKeyboard(boolean toggleOn) {
+    //if (toggleOn == true && keyboardOpen == false) {
+    //    openKeyboard();
+    //    keyboardOpen = true;
+    //} else if (toggleOn == false && keyboardOpen == true) {
+    //    closeKeyboard();
+    //    keyboardOpen = false;
+    //}
+}

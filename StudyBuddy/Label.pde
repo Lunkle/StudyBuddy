@@ -1,4 +1,4 @@
-class Label extends UIComponent{
+class Label extends UIComponent {
     String text;
     int size;
     color colour;
@@ -6,42 +6,40 @@ class Label extends UIComponent{
     float lifeTime = 0;
     float lifeTimeMax = -1;
     protected boolean timer = false;
-    
-    Label(String text, int textSize, float xValue, float yValue, color textColour){
+
+    public Label(String text, int textSize, float xPos, float yPos, color textColour) {
+        super(xPos, yPos);
         this.text = text;
-        position = new PVector(xValue, yValue);
         size = textSize;
         colour = textColour;
     }
-    
-    void setPositioning(int position){
+
+    void setPositioning(int position) {
         textPositioning = position;
     }
-    
-    void setTimer(int time){
+
+    void setTimer(int time) {
         timer = true;
         lifeTimeMax = time;
     }
-    
-    void displayComponent(){
+
+    void displayComponent() {
         lifeTime += 1000/frameRate;
-        if(timer){
-            if(lifeTimeMax - lifeTime <= 1000){
+        if (timer) {
+            if (lifeTimeMax - lifeTime <= 1000) {
                 fill(colour, (lifeTimeMax - lifeTime)/(500.0/255.0));
                 println(1 - (lifeTimeMax - lifeTime)/500);
             }
-        }else{
+        } else {
             fill(colour);
         }
         textAlign(textPositioning);
-        textFont(arvo, size);
+        textFont(ubuntu, size);
         text(text, position.x, position.y);
-        if(timer){
-            if(lifeTime > lifeTimeMax){
+        if (timer) {
+            if (lifeTime > lifeTimeMax) {
                 screen.removeComponent(number);
             }
         }
     }
-    
-    
 }
