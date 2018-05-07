@@ -13,7 +13,9 @@ PFont arvo;
 PFont ubuntu;
 
 Screen currentScreen;
-
+//GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//        .requestEmail()
+//        .build();
 void setup() {
     fullScreen();
     frameRate(20);
@@ -40,7 +42,7 @@ void draw() {
     textAlign(CENTER);
     textSize(80);
     fill(c5);
-    text("StudyBuddy", width/2, height/4);
+    //text("StudyBuddy", width/2, height/4);
     currentScreen.displayScreen();
 }
 
