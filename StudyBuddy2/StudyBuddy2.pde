@@ -6,6 +6,7 @@ import java.util.*;
 void setup(){
     size(800, 600);
     loadFonts();
+    getUsername();
     //createGUI();
 }
 
