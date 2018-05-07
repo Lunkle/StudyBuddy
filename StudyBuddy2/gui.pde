@@ -24,6 +24,7 @@ public void createGUI(){
   G4P.setCursor(ARROW);
   surface.setTitle("Sketch Window");
   title = new GLabel(this, 300, 110, 200, 80);
+  title.setFont(arvo);
   title.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   title.setText("StudyBuddy");
   title.setTextBold();
