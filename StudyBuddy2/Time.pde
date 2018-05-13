@@ -15,11 +15,21 @@ class Time{
     
     String getTwelveHourClockTime(){
         //TODO: return 3:24pm as an example
-        return "";
+        String twelveTime;
+        if (this.hour < 12) {
+          twelveTime=str(this.hour)+str(':') +str(minute)+ "am";
+        }
+        else {
+          twelveTime=str(this.hour-12)+str(':') +str(minute)+"pm";
+        }
+        return twelveTime;
     }
     
     String getTwentyFourHourClockTime(){
         //TODO: return 15:24 as an example
-        return "";
+        String fullClock;
+        fullClock=str(this.hour)+ ":" +str(minute);
+        return fullClock;
     }
+    
 }
