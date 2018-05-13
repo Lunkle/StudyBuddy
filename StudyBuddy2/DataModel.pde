@@ -1,8 +1,2 @@
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-//Private calendar for utility purposes.
-Calendar c = GregorianCalendar.getInstance();
-
-Event[][] events;
+Event[][] events = new Event[1][0];
 DayTile[] week = new DayTile[7];

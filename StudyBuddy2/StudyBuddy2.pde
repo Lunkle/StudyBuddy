@@ -1,13 +1,14 @@
-import java.awt.Font;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JScrollPane;
+import java.time.*;
 
+LocalDate today;
 
 void setup(){
     size(800, 600);
+    today = LocalDate.now();
     loadFonts();
     loadEvents();
+    loadWeek();
     getUsername();
 }
 

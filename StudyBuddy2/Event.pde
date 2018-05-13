@@ -1,23 +1,41 @@
 class Event{
-    Event(String text, Date date, Time time){
-        
+    String text;
+    LocalDate date;
+    Time time;
+    Event(String text, LocalDate date, Time time){
+        this.text = text;
+        this.date = date;
+        this.time = time;
     }
-}
-
-Date getDate(int year, int month, int date){
-    c.set(year, month, date);
-    return c.getTime();
 }
 
 void loadEvents(){
     String[] eventDataRaw = loadStrings("Events.txt");
-    Event[][] eventData = new Event[eventDataRaw.length][];
+    println(eventDataRaw.length);
+    Event[][] eventData = new Event[eventDataRaw.length][0];
     for (int i = 0; i < eventDataRaw.length; i++) {
         String[] eventRaw = eventDataRaw[i].split("//");
-        String[] dateDataRaw = eventRaw[1].split("/");
-        Date thisEventDate = getDate(int(dateDataRaw[2]), int(dateDataRaw[0]), int(dateDataRaw[1]));
+        LocalDate thisEventDate = LocalDate.parse(eventDataRaw[1]);
         Time thisEventTime = convertFromString(eventRaw[2]);
-        eventData[i] = (Event[]) append(eventData[i], new Event(eventRaw[0], thisEventDate, thisEventTime));
+        Event thisEvent = new Event(eventRaw[0], thisEventDate, thisEventTime);
+        eventData[i] = (Event[]) append(eventData[i], thisEvent);
     }
     events = eventData;
+}
+
+void loadWeek(){
+    int index = 0;
+    for(int i = 0; i < events.length; i++){
+        if(events[i][0].date.equals(today)){
+            index = i;
+            break;
+        }
+    }
+    LocalDate oneWeekFromToday = today.plusDays(7);
+    for(int i = index; i < index + 7; i++){
+        if(events[i][0].date.equals(today)){
+            index = i;
+            break;
+        }
+    }
 }

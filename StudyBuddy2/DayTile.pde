@@ -1,9 +1,9 @@
 class DayTile{
-    Date date;
+    LocalDate date;
     Event[] events;
     JScrollPane panel;
     
-    DayTile(JScrollPane panel, Date date, Event[] events){
+    DayTile(JScrollPane panel, LocalDate date, Event[] events){
         this.panel = panel;
         this.date = date;
         this.events = events;
@@ -16,6 +16,6 @@ class DayTile{
         fill(0);
         textAlign(CENTER);
         textFont(arvo, 16);
-        text(new SimpleDateFormat("EEEE dd MMMM yyyy").format(date), 100, 20);
+        text(date.toString(), 100, 20);
     }
 }
