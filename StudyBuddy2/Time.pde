@@ -17,10 +17,10 @@ class Time{
         //TODO: return 3:24pm as an example
         String twelveTime;
         if (this.hour < 12) {
-          twelveTime=str(this.hour)+str(':') +str(minute);
+          twelveTime=str(this.hour)+str(':') +str(minute)+ "am";
         }
         else {
-          twelveTime=str(this.hour-12)+str(':') +str(minute);
+          twelveTime=str(this.hour-12)+str(':') +str(minute)+"pm";
         }
         return twelveTime;
     }
@@ -28,9 +28,8 @@ class Time{
     String getTwentyFourHourClockTime(){
         //TODO: return 15:24 as an example
         String fullClock;
-        fullClock=str(this.hour)+str(':') +str(minute);
+        fullClock=str(this.hour)+ ":" +str(minute);
         return fullClock;
     }
-    
     
 }
