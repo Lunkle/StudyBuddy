@@ -1,3 +1,3 @@
-class DayTile(){
+class DayTile{
     
 }
