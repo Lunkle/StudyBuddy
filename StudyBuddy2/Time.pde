@@ -38,7 +38,10 @@ class Time {
     return new Time(int(splitNums[0]),int(splitNums[1]));
   }
   
+  String toString(){
+  getTwelveHourClockTime();
   
+  }
   
   
 }
