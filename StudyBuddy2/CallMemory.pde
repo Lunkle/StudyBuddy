@@ -9,7 +9,7 @@ void getUsername(){
 
 void getAppointment(){
   
-  String[] lines = loadStrings("Appointment.txt");
+  String[] lines = loadStrings("Events.txt");
   for (int i = 0 ; i < lines.length; i++) {
     println(lines[i]);
   } 
