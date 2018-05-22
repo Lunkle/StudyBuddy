@@ -10,6 +10,8 @@ class Panel {
     PVector size;
     DayTile[] elements = {};
     boolean visible = true;
+    
+    float velocity = 0;
 
     Panel(float xPos, float yPos, float pWidth, float pHeight) {
         position = new PVector(xPos, yPos);
@@ -22,6 +24,8 @@ class Panel {
     }
 
     void display() {
+        position.x += velocity;
+        velocity *= 0.8;
         if (visible) {
             translate(position.x, position.y);
             stroke(c4);
