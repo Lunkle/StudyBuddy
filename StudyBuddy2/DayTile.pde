@@ -21,6 +21,10 @@ class DayTile extends Element{
         textAlign(CENTER);
         textFont(ubuntu, 16);
         text(date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")), 100, 50);
+        //println(this.events.length);
+        for(int i = 0; i < this.events.length; i++){
+            text(this.events[i].text, WEEK_TILE_WIDTH/2, 80 + 20 * i);
+        }
         popMatrix();
     }
 }

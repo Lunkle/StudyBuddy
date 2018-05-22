@@ -7,17 +7,34 @@ class Event {
         this.date = date;
         this.time = time;
     }
+
+    String toString() {
+        return text + date;
+    }
 }
 
 void loadEvents() {
     String[] eventDataRaw = loadStrings("Events.txt");
-    Event[][] eventData = new Event[eventDataRaw.length][0];
+    Event[][] eventData = {};
+    int index = 0;
+    LocalDate lastDate = null;
     for (int i = 0; i < eventDataRaw.length; i++) {
         String[] eventRaw = eventDataRaw[i].split("//");
         LocalDate thisEventDate = LocalDate.parse(eventRaw[1]);
         Time thisEventTime = convertFromString(eventRaw[2]);
         Event thisEvent = new Event(eventRaw[0], thisEventDate, thisEventTime);
-        eventData[i] = (Event[]) append(eventData[i], thisEvent);
+        try {
+            if (thisEventDate.isAfter(lastDate)) {
+                index += 1;
+                eventData = (Event[][]) append(eventData, new Event[][]{});
+                lastDate = thisEventDate;
+            }
+        }
+        catch(Exception e) {
+            eventData = (Event[][]) append(eventData, new Event[]{});
+            lastDate = thisEventDate;
+        }
+        eventData[index] = (Event[]) append(eventData[index], thisEvent);
     }
     events = eventData;
 }
@@ -49,6 +66,7 @@ void loadWeek() {
             return;
         }
         int daysInBetween = int(today.until(events[i][0].date, ChronoUnit.DAYS));
+        //println(events[i][0]);
         week[daysInBetween].events = events[i];
     }
 }
