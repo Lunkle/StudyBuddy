@@ -16,11 +16,7 @@ void setup() {
 }
 
 void draw() { //<>//
+    mouseMoveHandler();
     drawGradient(c2, c5);
-    scale(1);
     weekPanel.display();
-    weekPanel.position.x -= 1;
-    //for (int i = 0; i < week.length; i++) {
-    //    week[i].display();
-    //}
 }

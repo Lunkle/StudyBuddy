@@ -5,8 +5,9 @@ color c4 = color(127, 193, 145);
 color c5 = color(23, 169, 146);
 
 void drawGradient(color colour1, color colour2){
-    for (float i = 0; i < height; i++) {
-        stroke(lerpColor(colour1, colour2, i/height));
-        line(0, i, width, i);
+    for (float i = 0; i < height; i+=2) {
+        noStroke();
+        fill(lerpColor(colour1, colour2, i/height));
+        rect(0, i, width, 2);
     }
 }

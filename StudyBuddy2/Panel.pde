@@ -3,6 +3,8 @@ Panel[] panels = {};
 Panel startPanel;
 Panel weekPanel;
 
+Panel selectedPanel;
+
 class Panel {
     PVector position;
     PVector size;
