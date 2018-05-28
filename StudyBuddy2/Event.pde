@@ -40,7 +40,6 @@ void loadEvents() {
 }
 
 void loadWeek() {
-    weekPanel = new Panel(0, height/4, PADDING + 7 * (WEEK_TILE_WIDTH + PADDING), WEEK_TILE_HEIGHT + 2 * PADDING);
     //Initialize.
     for (int i = 0; i < 7; i++) {
         week[i] = new DayTile(5 + i * (WEEK_TILE_WIDTH + 5), 5, today.plusDays(i), new Event[]{});

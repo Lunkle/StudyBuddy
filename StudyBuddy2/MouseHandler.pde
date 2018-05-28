@@ -1,18 +1,29 @@
-
+float timePressed = 0;
 void mousePressed() {
-    for (int i = 0; i < panels.length; i++) {
-        if (mouseX > panels[i].position.x && mouseX < panels[i].position.x + panels[i].size.x && mouseY > panels[i].position.y && mouseY < panels[i].position.y + panels[i].size.y) {
-            selectedPanel = panels[i];
+    for (int i = 0; i < components.length; i++) {
+        if (components[i].selected(mouseX, mouseY)) {
+            components[i].onSelect();
         }
     }
+    timePressed = millis();
 }
 
 void mouseMoveHandler() {
+    float time = millis();
+    if (millis() - timePressed > 500 || !(pmouseX == mouseX && pmouseY == mouseY)) {
+        selectedTile = null;
+    }
     if (selectedPanel != null) {
-        selectedPanel.velocity = mouseX - pmouseX;
+        selectedPanel.onDrag();
     }
 }
 
 void mouseReleased() {
-    selectedPanel = null;
+    if (selectedPanel!=null) {
+        selectedPanel.onRelease();
+    }
+    if (selectedTile!=null) {
+        selectedTile.onRelease();
+    }
+    //float timeBetween = millis() - timePressed;
 }

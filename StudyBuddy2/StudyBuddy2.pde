@@ -1,4 +1,3 @@
-import javax.swing.JScrollPane;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 
@@ -11,6 +10,7 @@ void setup() {
     today = LocalDate.now();
     loadFonts();
     loadEvents();
+    initPanels();
     loadWeek();
     getUsername();
 }
@@ -18,5 +18,5 @@ void setup() {
 void draw() { //<>//
     mouseMoveHandler();
     drawGradient(c2, c5);
-    weekPanel.display();
+    displayComponents();
 }
