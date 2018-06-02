@@ -39,21 +39,35 @@ void loadEvents() {
     events = eventData;
 }
 
+void loadMonth() {
+    month = new DayTile[today.lengthOfMonth()];
+    for (int i = 0; i < 7; i++) {
+        Label label = new Label(daysOfWeek[i], PADDING + i * (PADDING + WEEK_TILE_WIDTH), PADDING, WEEK_TILE_WIDTH, 30);
+        calendarPanel.addComponent(label);
+    }
+    
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 7; j++) {
+            DayTile tile = new DayTile(PADDING + j * (WEEK_TILE_WIDTH + PADDING), 2 * PADDING + 30 + i * (WEEK_TILE_HEIGHT + PADDING), today.plusDays(i), new Event[]{});
+            calendarPanel.addComponent(tile);
+        }
+    }
+}
+
 void loadWeek() {
     //Initialize.
     for (int i = 0; i < 7; i++) {
-        week[i] = new DayTile(5 + i * (WEEK_TILE_WIDTH + 5), 5, today.plusDays(i), new Event[]{});
-        weekPanel.addElement(week[i]);
+        week[i] = new DayTile(PADDING + i * (WEEK_TILE_WIDTH + PADDING), PADDING, today.plusDays(i), new Event[]{}, weekPanel);
     }
     //Check if any new events.
     if (events[events.length - 1][0].date.isBefore(today)) {
         //If not, we're done here.
         return;
     }
-    //Find today.
+    //Otherwise, find today.
     int index = 0;
     for (int i = 0; i < events.length; i++) {
-        if (events[i][0].date.equals(today)) {
+        if (events[i][0].date.isAfter(today)) {
             index = i;
             break;
         }

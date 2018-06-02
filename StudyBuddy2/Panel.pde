@@ -2,13 +2,14 @@ Panel[] panels = {};
 
 Panel canvasPanel;
 Panel weekPanel;
+Panel calendarPanel;
 
 Panel selectedPanel;
 
 class Panel extends Component {
-    Element[] subElements = {};
     boolean visible = true;
     boolean draggable = false;
+    boolean transparent = false;
     color colour;
 
     float velocity = 0;
@@ -23,21 +24,16 @@ class Panel extends Component {
         this.colour = colour;
     }
 
-    void addElement(Element element) {
-        element.parentPanel = this;
-        subElements = (Element[]) append(subElements, element);
-    }
-
     void display() {
         position.x += velocity;
         velocity *= 0.8;
         if (visible) {
-            pushMatrix();
-            translate(position.x, position.y);
             stroke(c4);
             fill(colour);
-            rect(0, 0, size.x, size.y);
-            popMatrix();
+            if (transparent) {
+                noFill();
+            }
+            super.display();
         }
     }
 
@@ -58,7 +54,8 @@ class Panel extends Component {
 
 void initPanels() {
     canvasPanel = new Panel(0, 0, width, height);
-    canvasPanel.setColour(color(0, 0, 0, 1));
+    canvasPanel.transparent = true;
+    calendarPanel = new Panel(width - 2 * PADDING - 7 * (WEEK_TILE_WIDTH + PADDING), PADDING, PADDING + 7 * (WEEK_TILE_WIDTH + PADDING), 2 * PADDING + 30 + 5 * (WEEK_TILE_HEIGHT + PADDING));
     weekPanel = new Panel(0, height/4, PADDING + 7 * (WEEK_TILE_WIDTH + PADDING), WEEK_TILE_HEIGHT + 2 * PADDING);
     weekPanel.draggable = true;
 }
