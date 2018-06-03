@@ -25,7 +25,7 @@ class Element extends Component {
             position = new PVector(PADDING, PADDING);
             Component pc = parentComponent;
             while (pc != null){
-                position.sub(parentComponent.position);
+                position.sub(pc.position);
                 pc = pc.parentComponent;
             }
             size = new PVector(width - 2 * PADDING, height - 2 * PADDING);

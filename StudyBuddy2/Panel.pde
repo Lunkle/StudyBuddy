@@ -19,6 +19,12 @@ class Panel extends Component {
         panels = (Panel[]) append(panels, this);
         colour = c3;
     }
+    
+    Panel(float xPos, float yPos, float pWidth, float pHeight, Component parentComponent) {
+        super(xPos, yPos, pWidth, pHeight, parentComponent);
+        panels = (Panel[]) append(panels, this);
+        colour = c3;
+    }
 
     void setColour(color colour) {
         this.colour = colour;
@@ -55,7 +61,8 @@ class Panel extends Component {
 void initPanels() {
     canvasPanel = new Panel(0, 0, width, height);
     canvasPanel.transparent = true;
-    calendarPanel = new Panel(width - 2 * PADDING - 7 * (WEEK_TILE_WIDTH + PADDING), PADDING, PADDING + 7 * (WEEK_TILE_WIDTH + PADDING), 2 * PADDING + 30 + 5 * (WEEK_TILE_HEIGHT + PADDING));
-    weekPanel = new Panel(0, height/4, PADDING + 7 * (WEEK_TILE_WIDTH + PADDING), WEEK_TILE_HEIGHT + 2 * PADDING);
-    weekPanel.draggable = true;
+    calendarPanel = new Panel(width - 2 * PADDING - 7 * (MONTH_TILE_WIDTH + PADDING), PADDING, PADDING + 7 * (MONTH_TILE_WIDTH + PADDING), 2 * PADDING + 30 + 5 * (MONTH_TILE_HEIGHT + PADDING));
+    canvasPanel.addComponent(calendarPanel);
+    weekPanel = new Panel(PADDING, 26 + 2 * PADDING, WEEK_TILE_WIDTH + 2 * PADDING, 26 + 2 * PADDING + 7 * (WEEK_TILE_HEIGHT + PADDING));
+    canvasPanel.addComponent(weekPanel);
 }

@@ -1,3 +1,5 @@
+import java.time.YearMonth;
+
 class Event {
     String text;
     LocalDate date;
@@ -42,13 +44,17 @@ void loadEvents() {
 void loadMonth() {
     month = new DayTile[today.lengthOfMonth()];
     for (int i = 0; i < 7; i++) {
-        Label label = new Label(daysOfWeek[i], PADDING + i * (PADDING + WEEK_TILE_WIDTH), PADDING, WEEK_TILE_WIDTH, 30);
+        Label label = new Label(daysOfWeek[i], PADDING + i * (PADDING + MONTH_TILE_WIDTH), PADDING, MONTH_TILE_WIDTH, 30);
         calendarPanel.addComponent(label);
     }
-    
+    int firstDayOfMonth = (today.withDayOfMonth(1).getDayOfWeek().getValue() - 1)%7;
+    YearMonth month = YearMonth.from(today);
+    println(firstDayOfMonth, month.lengthOfMonth());
     for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 7; j++) {
-            DayTile tile = new DayTile(PADDING + j * (WEEK_TILE_WIDTH + PADDING), 2 * PADDING + 30 + i * (WEEK_TILE_HEIGHT + PADDING), today.plusDays(i), new Event[]{});
+        for (int j = i>0?0:(firstDayOfMonth + 1); j < (i<5?7:7); j++) {
+            println(j);
+            LocalDate date = today.withDayOfMonth(i * 7 + j - firstDayOfMonth);
+            DayTile tile = new DayTile(PADDING + j * (MONTH_TILE_WIDTH + PADDING), 2 * PADDING + 30 + i * (MONTH_TILE_HEIGHT + PADDING), MONTH_TILE_WIDTH, MONTH_TILE_HEIGHT, date, new Event[]{});
             calendarPanel.addComponent(tile);
         }
     }
@@ -57,7 +63,7 @@ void loadMonth() {
 void loadWeek() {
     //Initialize.
     for (int i = 0; i < 7; i++) {
-        week[i] = new DayTile(PADDING + i * (WEEK_TILE_WIDTH + PADDING), PADDING, today.plusDays(i), new Event[]{}, weekPanel);
+        week[i] = new DayTile(PADDING, 26 + 2 * PADDING + i * (WEEK_TILE_HEIGHT + PADDING), WEEK_TILE_WIDTH, WEEK_TILE_HEIGHT, today.plusDays(i), new Event[]{}, weekPanel);
     }
     //Check if any new events.
     if (events[events.length - 1][0].date.isBefore(today)) {

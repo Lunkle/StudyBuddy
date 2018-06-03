@@ -4,6 +4,7 @@ Component[] components = {};
 class Component {
     Component parentComponent;
     Component[] subComponents = {};
+    boolean visible = true;
     PVector position;
     PVector size;
     PVector currentPosition;
@@ -84,13 +85,16 @@ class Component {
     void onRelease() {
     }
 
-    void switchOrder(int index1, int index2) {
-        int tempNum = subComponents[index1].number;
-        subComponents[index1].number = subComponents[index2].number;
-        subComponents[index2].number = tempNum;
-        Component temp = subComponents[index1];
-        subComponents[index1] = subComponents[index2];
-        subComponents[index2] = temp;
+    void switchToFirst(int index) {
+        int tempNum = subComponents[index].number;
+        subComponents[index].number = subComponents[subComponents.length - 1].number;
+        subComponents[subComponents.length - 1].number = tempNum;
+        Component temp = subComponents[index];
+        subComponents[index] = subComponents[subComponents.length - 1];
+        subComponents[subComponents.length - 1] = temp;
+        if (parentComponent != null) {
+            parentComponent.switchToFirst(number);
+        }
     }
 }
 

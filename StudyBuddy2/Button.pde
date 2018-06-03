@@ -44,7 +44,6 @@ class Button extends Component {
         textAlign(CENTER);
         text(text, 0, 0);
         if (icon != null) {
-            println("hi");
             translate(-icon.width/2, -icon.height/2);
             image(icon, 0, 0);
         }

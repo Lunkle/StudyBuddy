@@ -2,6 +2,7 @@ final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 
 String name;
 Label nameLabel;
+Label weekLabel;
 boolean nameFieldVisible = false;
 Button editName;
 
@@ -19,6 +20,7 @@ void initHomeScreen(){
             nameField.setVisible(nameFieldVisible);
         }
     });
+    weekLabel = new Label("This week's schedule:", PADDING, PADDING, 199 - 2 * PADDING, 26, weekPanel);
     loadWeek();
     loadMonth();
 }

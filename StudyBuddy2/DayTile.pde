@@ -1,6 +1,8 @@
 import java.time.format.DateTimeFormatter;
-final float WEEK_TILE_WIDTH = 78;
-final float WEEK_TILE_HEIGHT = 90;
+final float WEEK_TILE_WIDTH = 190;
+final float WEEK_TILE_HEIGHT = 60;
+final float MONTH_TILE_WIDTH = 78;
+final float MONTH_TILE_HEIGHT = 85;
 DayTile selectedTile = null;
 
 DayTile[] dayTiles = {};
@@ -13,17 +15,17 @@ class DayTile extends Element {
     void init(LocalDate date, Event[] events){
         this.date = date;
         this.events = events;
-        //timeTable = new TimeTable(PADDING, PADDING, WEEK_TILE_WIDTH - 2 * PADDING, WEEK_TILE_HEIGHT - 2 * PADDING, events, this);
+        timeTable = new TimeTable(PADDING, height - 3 * PADDING - 500, width - 4 * PADDING, 500, events, this);
         dayTiles = (DayTile[]) append(dayTiles, this);
     }
 
-    DayTile(float xPos, float yPos, LocalDate date, Event[] events) {
-        super(xPos, yPos, WEEK_TILE_WIDTH, WEEK_TILE_HEIGHT);
+    DayTile(float xPos, float yPos, float dWidth, float dHeight, LocalDate date, Event[] events) {
+        super(xPos, yPos, dWidth, dHeight);
         init(date, events);
     }
     
-    DayTile(float xPos, float yPos, LocalDate date, Event[] events, Component parentComponent) {
-        super(xPos, yPos, WEEK_TILE_WIDTH, WEEK_TILE_HEIGHT, parentComponent);
+    DayTile(float xPos, float yPos, float dWidth, float dHeight, LocalDate date, Event[] events, Component parentComponent) {
+        super(xPos, yPos, dWidth, dHeight, parentComponent);
         init(date, events);
     }
 
@@ -36,7 +38,7 @@ class DayTile extends Element {
         fill(0);
         textAlign(CENTER);
         textFont(ubuntu, expanded? 16:10);
-        text(date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")), currentSize.x/2, 50);
+        text(date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")), currentSize.x/2, (expanded? (PADDING + 26):currentSize.y/2));
         for (int i = 0; i < this.events.length; i++) {
             text(this.events[i].text, currentSize.x/2, 80 + 20 * i);
         }
@@ -54,6 +56,9 @@ class DayTile extends Element {
         }
         this.expanded = !stateBefore;
         selectedTile = null;
-        parentComponent.switchOrder(this.number, parentComponent.subComponents.length - 1);
+        parentComponent.switchToFirst(this.number);
+        for (int i = 0; i < subComponents.length; i++) {
+            subComponents[i].visible = !subComponents[i].visible;
+        }
     }
 }
