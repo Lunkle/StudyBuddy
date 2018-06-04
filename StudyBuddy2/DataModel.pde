@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 
 final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
+final String SERVER_IP = "192.168.0.77:8080";
 String sessionID = "";
 String[] messages = {"==========Chat=========="};
 String name;
@@ -81,7 +82,7 @@ void getUsername() {
 
 void getSessionID() {
     try {
-        String[] sessionIDRaw = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=connect&username=" + URLEncoder.encode(name, "UTF-8"));
+        String[] sessionIDRaw = loadStrings("http://" + SERVER_IP + "/StudyBuddy/?cmd=connect&username=" + URLEncoder.encode(name, "UTF-8"));
         sessionID = sessionIDRaw[0].split("=")[1];
         println("Session ID:", sessionID);
     }
@@ -94,7 +95,7 @@ void sendMessage(String message) {
     String response = "";
     while (!response.equals("OK")) {
         try {
-            String[] responseRaw = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=sendMsg&sessionID=" + URLEncoder.encode(sessionID, "UTF-8") + "&message=" + URLEncoder.encode(message, "UTF-8"));
+            String[] responseRaw = loadStrings("http://" + SERVER_IP + "/StudyBuddy/?cmd=sendMsg&sessionID=" + URLEncoder.encode(sessionID, "UTF-8") + "&message=" + URLEncoder.encode(message, "UTF-8"));
             response = responseRaw[0].split("=")[1];
         } 
         catch (UnsupportedEncodingException e) {
@@ -115,7 +116,7 @@ void getMessages() {
     while (true) {
         if (millis() - time >= 1000 || flag) {
             try {
-                messages = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=checkMsg&sessionID=" + URLEncoder.encode(sessionID, "UTF-8"));
+                messages = loadStrings("http://" + SERVER_IP + "/StudyBuddy/?cmd=checkMsg&sessionID=" + URLEncoder.encode(sessionID, "UTF-8"));
                 chatBox.text = messages[0].split(";");
                 time = millis();
                 flag = false;

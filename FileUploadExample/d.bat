@@ -1,4 +1,4 @@
-set TOMCAT_HOME=C:\tools\apache-tomcat-7.0.67-1
+set TOMCAT_HOME=C:\Tools\ApacheTomcat
 rem call %TOMCAT_HOME%\bin\shutdown.bat
 del %TOMCAT_HOME%\webapps\StudyBuddy.war
 rmdir %TOMCAT_HOME%\webapps\StudyBuddy /S /Q
