@@ -63,6 +63,6 @@ void initPanels() {
     canvasPanel.transparent = true;
     calendarPanel = new Panel(width - 2 * PADDING - 7 * (MONTH_TILE_WIDTH + PADDING), PADDING, PADDING + 7 * (MONTH_TILE_WIDTH + PADDING), 2 * PADDING + 30 + 5 * (MONTH_TILE_HEIGHT + PADDING));
     canvasPanel.addComponent(calendarPanel);
-    weekPanel = new Panel(PADDING, 26 + 2 * PADDING, WEEK_TILE_WIDTH + 2 * PADDING, 26 + 2 * PADDING + 7 * (WEEK_TILE_HEIGHT + PADDING));
+    weekPanel = new Panel(PADDING - 1, 26 + 2 * PADDING, WEEK_TILE_WIDTH + 2 * PADDING, 26 + 2 * PADDING + 7 * (WEEK_TILE_HEIGHT + PADDING));
     canvasPanel.addComponent(weekPanel);
 }

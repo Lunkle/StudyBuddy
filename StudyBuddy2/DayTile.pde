@@ -1,6 +1,6 @@
 import java.time.format.DateTimeFormatter;
 final float WEEK_TILE_WIDTH = 190;
-final float WEEK_TILE_HEIGHT = 60;
+final float WEEK_TILE_HEIGHT = 30;
 final float MONTH_TILE_WIDTH = 78;
 final float MONTH_TILE_HEIGHT = 85;
 DayTile selectedTile = null;
@@ -28,6 +28,11 @@ class DayTile extends Element {
         super(xPos, yPos, dWidth, dHeight, parentComponent);
         init(date, events);
     }
+    
+    void updateEvents(Event events[]){
+        this.events = events;
+        timeTable = new TimeTable(PADDING, height - 3 * PADDING - 500, width - 4 * PADDING, 500, this.events, this);
+    }
 
     void display() {
         stroke(c3);
@@ -38,10 +43,7 @@ class DayTile extends Element {
         fill(0);
         textAlign(CENTER);
         textFont(ubuntu, expanded? 16:10);
-        text(date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")), currentSize.x/2, (expanded? (PADDING + 26):currentSize.y/2));
-        for (int i = 0; i < this.events.length; i++) {
-            text(this.events[i].text, currentSize.x/2, 80 + 20 * i);
-        }
+        text(date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")), currentSize.x/2, (expanded? (PADDING + 26):(currentSize.y/2 + 5)));
         popMatrix();
     }
 

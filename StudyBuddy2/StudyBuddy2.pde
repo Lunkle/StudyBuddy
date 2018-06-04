@@ -6,12 +6,13 @@ final float PADDING = 5;
 LocalDate today;
 
 void setup() {
-    size(800, 600);
+    size(800, 603);
     init();
 }
 
 void init() {
     getUsername();
+    getSessionID();
     strokeWeight(2);
     today = LocalDate.now();
     loadFonts();
@@ -19,6 +20,7 @@ void init() {
     initPanels();
     initHomeScreen();
     createGUI();
+    thread("getMessages");
 }
 
 void draw() {

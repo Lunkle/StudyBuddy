@@ -11,7 +11,11 @@ class Event {
     }
 
     String toString() {
-        return text + date;
+        return text;
+    }
+    
+    String toStringForSave(){
+        return "";
     }
 }
 
@@ -41,6 +45,17 @@ void loadEvents() {
     events = eventData;
 }
 
+Event[] getEventsForDay(LocalDate date) {
+    for (int i = 0; i < events.length; i++) {
+        if (events[i][0].date.isAfter(date)) {
+            return new Event[]{};
+        }else if(events[i][0].date.equals(date)){
+            return events[i];
+        }
+    }
+    return new Event[]{};
+}
+
 void loadMonth() {
     month = new DayTile[today.lengthOfMonth()];
     for (int i = 0; i < 7; i++) {
@@ -49,12 +64,10 @@ void loadMonth() {
     }
     int firstDayOfMonth = (today.withDayOfMonth(1).getDayOfWeek().getValue() - 1)%7;
     YearMonth month = YearMonth.from(today);
-    println(firstDayOfMonth, month.lengthOfMonth());
     for (int i = 0; i < 5; i++) {
         for (int j = i>0?0:(firstDayOfMonth + 1); j < (i<5?7:7); j++) {
-            println(j);
             LocalDate date = today.withDayOfMonth(i * 7 + j - firstDayOfMonth);
-            DayTile tile = new DayTile(PADDING + j * (MONTH_TILE_WIDTH + PADDING), 2 * PADDING + 30 + i * (MONTH_TILE_HEIGHT + PADDING), MONTH_TILE_WIDTH, MONTH_TILE_HEIGHT, date, new Event[]{});
+            DayTile tile = new DayTile(PADDING + j * (MONTH_TILE_WIDTH + PADDING), 2 * PADDING + 30 + i * (MONTH_TILE_HEIGHT + PADDING), MONTH_TILE_WIDTH, MONTH_TILE_HEIGHT, date, getEventsForDay(date));
             calendarPanel.addComponent(tile);
         }
     }
@@ -74,7 +87,7 @@ void loadWeek() {
     int index = 0;
     for (int i = 0; i < events.length; i++) {
         if (events[i][0].date.isAfter(today)) {
-            index = i;
+            index = i - 1;
             break;
         }
     }
@@ -85,7 +98,6 @@ void loadWeek() {
             return;
         }
         int daysInBetween = int(today.until(events[i][0].date, ChronoUnit.DAYS));
-        //println(events[i][0]);
-        week[daysInBetween].events = events[i];
+        week[daysInBetween].updateEvents(events[i]);
     }
 }

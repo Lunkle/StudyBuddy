@@ -36,6 +36,21 @@ class Time {
     String toString() {
         return getTwelveHourClockTime();
     }
+
+    boolean isAfter(Time time) {
+        if (hour > time.hour) {
+            return true;
+        } else if (hour == time.hour) {
+            if (minute > time.minute) {
+                return true;
+            } else if (minute == time.minute) {
+                if (second >= time.second) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
 
 Time convertFromString(String timeString) {
