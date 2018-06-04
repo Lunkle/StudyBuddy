@@ -86,8 +86,8 @@ void loadWeek() {
     //Otherwise, find today.
     int index = 0;
     for (int i = 0; i < events.length; i++) {
-        if (events[i][0].date.isAfter(today)) {
-            index = i - 1;
+        if (!events[i][0].date.isBefore(today)) {
+            index = i;
             break;
         }
     }

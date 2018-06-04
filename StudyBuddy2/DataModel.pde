@@ -4,7 +4,7 @@ import java.net.URLEncoder;
 
 final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-final String SERVER_IP = "192.168.0.77:8080";
+final String SERVER_IP = "172.21.200.18:8080";
 String sessionID = "";
 String[] messages = {"==========Chat=========="};
 String name;
@@ -16,7 +16,7 @@ boolean nameFieldVisible = false;
 Button editName;
 Button docLink;
 Button driveLink;
-Button hi;
+Button destressLink;
 
 Event[][] events = new Event[1][0];
 DayTile[] week = new DayTile[7];
@@ -59,11 +59,11 @@ void initHomeScreen() {
         }
     }    
     );
-    driveLink = new Button(loadImage("toDrive.png"), 4 * PADDING + weekPanel.size.x + 200, 2 * PADDING + calendarPanel.size.y, 100, 100, canvasPanel);
-    driveLink.setOnClick(new Runnable() {
+    destressLink = new Button(loadImage("trollFace.png"), 4 * PADDING + weekPanel.size.x + 200, 2 * PADDING + calendarPanel.size.y, 100, 100, canvasPanel);
+    destressLink.setOnClick(new Runnable() {
         @Override
             public void run() {
-            link("www.drive.google.com");
+            link("https://www.memedroid.com/memes/random");
         }
     }    
     );
