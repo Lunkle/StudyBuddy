@@ -1,3 +1,7 @@
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 String sessionID = "";
@@ -77,7 +81,7 @@ void getUsername() {
 
 void getSessionID() {
     try {
-        String[] sessionIDRaw = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=connect&username=" + name);
+        String[] sessionIDRaw = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=connect&username=" + URLEncoder.encode(name, "UTF-8"));
         sessionID = sessionIDRaw[0].split("=")[1];
         println("Session ID:", sessionID);
     }
@@ -89,25 +93,35 @@ void getSessionID() {
 void sendMessage(String message) {
     String response = "";
     while (!response.equals("OK")) {
-        String[] responseRaw = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=sendMsg&sessionID=" + sessionID + "&message=" + message);
-        response = responseRaw[0].split("=")[1];
+        try {
+            String[] responseRaw = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=sendMsg&sessionID=" + URLEncoder.encode(sessionID, "UTF-8") + "&message=" + URLEncoder.encode(message, "UTF-8"));
+            response = responseRaw[0].split("=")[1];
+        } 
+        catch (UnsupportedEncodingException e) {
+        }
     }
     println("sent");
+    flag = true;
 }
 
-void dumbSend(String message){
+void dumbSend(String message) {
     messages = (String[]) append(messages, name + ": " + message);
     chatBox.text = messages;
 }
 
+boolean flag = false;
 void getMessages() {
     float time = millis();
     while (true) {
-        if (millis() - time >= 1000) {
-            messages = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=checkMsg&sessionID=" + sessionID);
-            println(messages);
-            chatBox.text = messages[0].split(";");
-            time = millis();
+        if (millis() - time >= 1000 || flag) {
+            try {
+                messages = loadStrings("http://192.168.0.76/StudyBuddy/?cmd=checkMsg&sessionID=" + URLEncoder.encode(sessionID, "UTF-8"));
+                chatBox.text = messages[0].split(";");
+                time = millis();
+                flag = false;
+            }
+            catch(Exception e) {
+            }
         }
     }
 }
