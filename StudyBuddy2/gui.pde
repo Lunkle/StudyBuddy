@@ -22,6 +22,7 @@ public void nameFieldChange(GTextField source, GEvent event) { //_CODE_:nameFiel
         source.setText("");
         nameFieldVisible = false;
         source.setVisible(nameFieldVisible);
+        getSessionID();
     }
 } //_CODE_:nameField:851807:
 
