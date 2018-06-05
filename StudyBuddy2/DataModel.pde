@@ -4,7 +4,8 @@ import java.net.URLEncoder;
 
 final String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-final String SERVER_IP = "172.21.200.18:8080";
+final String SERVER_IP = "172.21.208.27:8080";
+//final String SERVER_IP = "192.168.0.77:8080";
 String sessionID = "";
 String[] messages = {"==========Chat=========="};
 String name;
